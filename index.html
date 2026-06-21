@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MainZ YouTube Downloader</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Geist:wght@500;700&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#00302c",
+                "inverse-primary": "#bb152c",
+                "secondary-container": "#af8d11",
+                "on-tertiary-fixed": "#00201d",
+                "secondary-fixed-dim": "#e9c349",
+                "surface-dim": "#131313",
+                "primary-fixed-dim": "#ffb3b1",
+                "primary-container": "#ff535b",
+                "on-background": "#e5e2e1",
+                "error-container": "#93000a",
+                "surface-container-highest": "#353534",
+                "on-error-container": "#ffdad6",
+                "on-secondary-fixed-variant": "#574500",
+                "on-surface-variant": "#e4bebc",
+                "outline-variant": "#5b403f",
+                "on-primary-container": "#5b000e",
+                "tertiary": "#6fd8cc",
+                "on-tertiary": "#003733",
+                "on-primary": "#680011",
+                "on-surface": "#e5e2e1",
+                "on-error": "#690005",
+                "surface-tint": "#ffb3b1",
+                "on-primary-fixed": "#410007",
+                "secondary": "#e9c349",
+                "surface-bright": "#3a3939",
+                "on-primary-fixed-variant": "#92001c",
+                "tertiary-container": "#2fa096",
+                "on-tertiary-fixed-variant": "#00504a",
+                "primary": "#ffb3b1",
+                "inverse-surface": "#e5e2e1",
+                "secondary-fixed": "#ffe088",
+                "on-secondary-fixed": "#241a00",
+                "on-secondary": "#3c2f00",
+                "surface": "#131313",
+                "on-secondary-container": "#342800",
+                "surface-container-high": "#2a2a2a",
+                "surface-container-low": "#1c1b1b",
+                "surface-container-lowest": "#0e0e0e",
+                "tertiary-fixed": "#8cf4e8",
+                "primary-fixed": "#ffdad8",
+                "surface-container": "#201f1f",
+                "inverse-on-surface": "#313030",
+                "outline": "#ab8987",
+                "tertiary-fixed-dim": "#6fd8cc",
+                "error": "#ffb4ab",
+                "surface-variant": "#353534",
+                "background": "#131313"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "edge-margin": "20px",
+                "md": "24px",
+                "base": "4px",
+                "gutter": "16px",
+                "lg": "32px",
+                "sm": "16px",
+                "xs": "8px",
+                "xl": "48px"
+        },
+        "fontFamily": {
+                "headline-lg": [
+                        "Sora"
+                ],
+                "mono-data": [
+                        "Geist"
+                ],
+                "headline-lg-mobile": [
+                        "Sora"
+                ],
+                "label-caps": [
+                        "Geist"
+                ],
+                "title-md": [
+                        "Sora"
+                ],
+                "display-lg": [
+                        "Sora"
+                ],
+                "body-sm": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "mono-data": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "title-md": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ]
+        },
+        "animation": {
+          'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          'shimmer': 'shimmer 2s infinite linear',
+        },
+        "keyframes": {
+          fadeInUp: {
+            '0%': { opacity: '0', transform: 'translateY(20px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+          },
+          shimmer: {
+            '0%': { transform: 'translateX(-100%)' },
+            '100%': { transform: 'translateX(100%)' },
+          }
+        }
+},
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: transparent; /* Let canvas show through */
+    color: theme('colors.on-background');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  #glcanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+  .glass-card {
+    background: theme('colors.surface-container-low');
+    border: 1px solid theme('colors.outline-variant');
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-nav {
+    background: rgba(19, 19, 19, 0.8);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+  }
+  .btn-gradient {
+    background: linear-gradient(135deg, theme('colors.inverse-primary') 0%, theme('colors.primary-container') 100%);
+    box-shadow: 0 8px 24px -8px rgba(230, 57, 70, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+  }
+  .btn-gradient:hover {
+    box-shadow: 0 12px 32px -8px rgba(230, 57, 70, 0.6);
+  }
+  .input-glow:focus {
+    border-color: theme('colors.primary-container');
+    box-shadow: 0 0 12px 0 rgba(230, 57, 70, 0.3);
+  }
+  .accordion-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .accordion-content.open {
+    max-height: 200px;
+    opacity: 1;
+    padding-bottom: theme('spacing.sm');
+  }
+  
+  /* Shared Components Styles */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="min-h-screen flex flex-col relative pb-32">
+<!-- Background Shader Canvas -->
+<canvas id="glcanvas"></canvas>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-xl flex items-center justify-between px-edge-margin h-16 animate-fade-in-up">
+<div class="flex items-center gap-xs">
+<img alt="MainZ Dragon Sword Logo" class="h-8 w-8 object-contain rounded-full border border-outline-variant animate-pulse" src="https://lh3.googleusercontent.com/aida/AP1WRLukB936CgFBTEKgysJAR94ciWxOJFaB-FKh0dWq3qaYGxZyzNklOPGNHKERRnH5DOaM02F55PjqV_3tYznkwV76QjXrxCHgkt2GVjm97NoxSYAuan2Itj2AcZnegJS-aKwOOW6EU0Aess_ev_NMhZgCOwxkp3lGhWB4ldGjnSvpJGjMyX8pnQscymWxcFAAZ6QRZw1ku7GKWiAx1Dj3tFs7Lq5iIWQ3jmjCYOkSDi5RqcMU0rZ3Kcc_GYE"/>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tighter text-primary">MainZ</h1>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="swords">swords</span>
+</header>
+<main class="flex-grow pt-24 px-edge-margin pb-xl flex flex-col gap-xl max-w-4xl mx-auto w-full z-10 relative gap-20">
+<!-- Hero / Input Section -->
+<section class="flex flex-col gap-lg items-center text-center mt-lg animate-on-scroll">
+<div class="flex flex-col items-center gap-sm">
+<h2 class="font-display-lg text-display-lg text-on-surface">YouTube Downloader</h2>
+<p class="font-body-lg text-body-lg text-primary font-bold">Gas terus cuy, download sepuasnya tanpa ribet! 🚀</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">Tinggal copas link lo dimari, langsung sikat video ato audionya.</p>
+</div>
+<div class="w-full max-w-xl flex flex-col gap-sm relative">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">link</span>
+<input class="w-full h-16 pl-xl pr-sm rounded-xl bg-surface-container-high border border-outline-variant text-on-surface font-body-lg text-body-lg placeholder-on-surface-variant/50 focus:outline-none input-glow transition-all" id="videoUrlInput" placeholder="https://youtube.com/watch?v=..." type="url"/>
+</div>
+<div class="flex gap-sm overflow-x-auto pb-1" id="formatChips">
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="720">MP4 720p</button>
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="1080">MP4 1080p</button>
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="1440">MP4 1440p</button>
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="360">MP4 360p</button>
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="mp3">MP3 Audio</button>
+<button class="format-chip flex-shrink-0 px-sm py-1.5 rounded-full border border-outline-variant bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps transition-all active:scale-95" data-format="m4a">M4A Audio</button>
+</div>
+<button class="btn-gradient w-full h-16 rounded-xl font-headline-lg-mobile text-headline-lg-mobile text-white flex items-center justify-center gap-xs active:scale-95 transition-transform" id="sikatBtn" type="button">
+<span class="material-symbols-outlined" id="sikatBtnIcon">analytics</span>
+<span id="sikatBtnText">Sikat Bro!</span>
+</button>
+<p class="font-body-sm text-body-sm text-error hidden text-left px-xs" id="errorMsg"></p>
+</div>
+</section>
+<!-- Preview Section (Dynamic States) -->
+<section class="hidden glass-card rounded-[24px] p-md flex-col md:flex-row gap-lg items-center animate-on-scroll" id="previewSection" style="animation-delay: 0.2s;">
+<div class="w-full md:w-1/2 aspect-video bg-surface-container-highest rounded-xl overflow-hidden relative border border-white/5">
+<img class="w-full h-full object-cover hidden" id="previewThumb" src=""/>
+<div class="w-full h-full flex items-center justify-center" id="previewThumbFallback"><span class="material-symbols-outlined text-on-surface-variant text-[48px]">movie</span></div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col gap-sm items-start">
+<!-- Loading state -->
+<div class="flex flex-col gap-sm w-full" id="previewLoading">
+<div class="bg-secondary/20 border border-secondary text-secondary px-xs py-1 rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px] animate-spin">progress_activity</span> <span id="loadingStatusText">Lagi Disikat...</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface line-clamp-2" id="previewTitleLoading">Nungguin server kelar masak...</h3>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden border border-white/5">
+<div class="h-full bg-gradient-to-r from-inverse-primary to-primary-container rounded-full transition-all duration-300" id="progressBar" style="width: 0%"></div>
+</div>
+<p class="font-mono-data text-mono-data text-on-surface-variant" id="progressPercentText">0%</p>
+</div>
+<!-- Result state -->
+<div class="hidden flex-col gap-sm items-start w-full" id="previewResult">
+<div class="bg-secondary/20 border border-secondary text-secondary px-xs py-1 rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Mantap, Gas!
+</div>
+<h3 class="font-title-md text-title-md text-on-surface line-clamp-2" id="previewTitle">-</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-3" id="previewFormat">-</p>
+<a class="mt-sm btn-gradient w-full py-sm rounded-xl font-title-md text-title-md text-white flex items-center justify-center gap-xs active:scale-95 transition-transform" download="" href="#" id="downloadLink" target="_blank">
+<span class="material-symbols-outlined">download</span>
+<span id="downloadBtnText">Sedot Sekarang</span>
+</a>
+</div>
+<!-- Error state -->
+<div class="hidden flex-col gap-sm items-start w-full" id="previewError">
+<div class="bg-error/20 border border-error text-error px-xs py-1 rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1 w-max">
+<span class="material-symbols-outlined text-[14px]">error</span> Gagal, Cuy
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="previewErrorText">Ada yang error nih.</p>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="flex flex-col gap-md mt-xl animate-on-scroll" style="animation-delay: 0.4s;">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Kepo Nih Ye (QnA)</h2>
+<div class="flex flex-col gap-sm">
+<!-- FAQ Item 1 -->
+<div class="glass-card rounded-xl border border-outline-variant overflow-hidden cursor-pointer faq-item">
+<div class="flex items-center justify-between p-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Pakenya bijimana bang?</h4>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 icon">expand_more</span>
+</div>
+<div class="accordion-content px-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gampang bet! Lu tinggal copas aje link YouTube yang mo di sedot ke kotak di atas. Trus klik 'Sikat Bro!', tunggu bentar, pilih deh mau format ape trus donlod dah.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="glass-card rounded-xl border border-outline-variant overflow-hidden cursor-pointer faq-item">
+<div class="flex items-center justify-between p-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Gratisan kaga nih?</h4>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 icon">expand_more</span>
+</div>
+<div class="accordion-content px-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yoi dong! MainZ mah emang dibikin buat lu pada sedot-sedot gratisan, no limit-limit club pokoknya.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="glass-card rounded-xl border border-outline-variant overflow-hidden cursor-pointer faq-item">
+<div class="flex items-center justify-between p-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Bisa sedot mp3 doang ga?</h4>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 icon">expand_more</span>
+</div>
+<div class="accordion-content px-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bisa banget bosku! Ntar pas abis di 'Sikat', lu tinggal pilih opsi audio aje, langsung nyedot format mp3 dah tuh lagunya.</p>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="glass-card rounded-xl border border-outline-variant overflow-hidden cursor-pointer faq-item">
+<div class="flex items-center justify-between p-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Aman ga HP w ntar kemasukan virus?</h4>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 icon">expand_more</span>
+</div>
+<div class="accordion-content px-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aman sentosa jaya abadi cuy! Kagak pake iklan pop-up ga jelas yang bikin puyeng, clean as fuck lah intinya.</p>
+</div>
+</div>
+<!-- FAQ Item 5 -->
+<div class="glass-card rounded-xl border border-outline-variant overflow-hidden cursor-pointer faq-item">
+<div class="flex items-center justify-between p-sm">
+<h4 class="font-title-md text-title-md text-on-surface">Kok ngelag pas donlod bang?</h4>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 icon">expand_more</span>
+</div>
+<div class="accordion-content px-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kalo ngelag biasanye gara-gara inet lu yang kentang ngab, coba cari wifi warkop gih biar kenceng.</p>
+</div>
+</div>
+</div>
+</section><section class="flex flex-col gap-md mt-xl animate-on-scroll" style="animation-delay: 0.6s;"><h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Daftar Sikat Kemaren (History)</h2><div class="flex flex-col gap-sm" id="historyList"><div class="glass-card rounded-xl p-md flex flex-col items-center text-center gap-xs border border-white/5" id="historyEmpty"><span class="material-symbols-outlined text-on-surface-variant text-[32px]">inbox</span><p class="font-body-sm text-body-sm text-on-surface-variant">Belom ada riwayat sikatan. Gas donlod video pertama lo!</p></div></div></section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl border-t border-white/10 shadow-[0_-10px_20px_rgba(230,57,70,0.1)] flex justify-around items-center h-20 px-edge-margin pb-safe bg-surface/80 backdrop-blur-[32px] md:hidden animate-fade-in-up"><div class="flex flex-col items-center gap-1 text-primary cursor-pointer hover:text-primary transition-colors active:scale-90" id="navHome"><span class="material-symbols-outlined" data-weight="fill">home</span><span class="font-label-caps text-label-caps">Downloader</span></div><div class="flex flex-col items-center gap-1 text-on-surface-variant cursor-pointer hover:text-primary transition-colors active:scale-90" id="navHistory"><span class="material-symbols-outlined">history</span><span class="font-label-caps text-label-caps">History</span></div></nav>
+<!-- Footer -->
+<footer class="w-full py-lg border-t border-outline-variant bg-surface-container-lowest flex flex-col items-center gap-xs px-edge-margin mt-auto mb-20 md:mb-0 hidden md:flex animate-fade-in-up">
+<h2 class="font-title-md text-primary">Dibuat santai oleh Mainz © 2024</h2>
+<div class="flex gap-sm">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Aturan Maen</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Rahasia Dapur</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all" href="#">Tanya Mimin</a>
+</div>
+</footer>
+<script>
+    // WebGL Shader Setup
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl');
+
+    if (gl) {
+      const vsSource = `
+        attribute vec4 aVertexPosition;
+        attribute vec2 aTextureCoord;
+        varying vec2 v_texCoord;
+        void main() {
+          gl_Position = aVertexPosition;
+          v_texCoord = aTextureCoord;
+        }
+      `;
+
+      const fsSource = `
+        precision highp float;
+        varying vec2 v_texCoord;
+        uniform float u_time;
+        uniform vec2 u_resolution;
+
+        void main() {
+            vec2 uv = v_texCoord;
+            
+            // Background flow
+            float flow = sin(uv.x * 5.0 + u_time * 0.5) * 0.1;
+            float flow2 = cos(uv.y * 3.0 - u_time * 0.3) * 0.1;
+            
+            vec3 color1 = vec4(0.07, 0.07, 0.07, 1.0).rgb; // surface-container
+            vec3 color2 = vec4(0.9, 0.22, 0.27, 1.0).rgb; // primary #e63946 approx
+            
+            float pulse = sin(u_time * 0.8) * 0.5 + 0.5;
+            float mask = smoothstep(0.4, 0.6, uv.y + flow + flow2);
+            
+            vec3 finalColor = mix(color1, color2 * 0.2, mask * pulse * 0.3);
+            
+            // Add some noise/shimmer
+            float shimmer = fract(sin(dot(uv + u_time * 0.01, vec2(12.9898, 78.233))) * 43758.5453);
+            finalColor += shimmer * 0.02;
+
+            gl_FragColor = vec4(finalColor, 1.0);
+        }
+      `;
+
+      function initShaderProgram(gl, vsSource, fsSource) {
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+        const shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+        return shaderProgram;
+      }
+
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+      }
+
+      const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+      const programInfo = {
+        program: shaderProgram,
+        attribLocations: {
+          vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+          textureCoord: gl.getAttribLocation(shaderProgram, 'aTextureCoord'),
+        },
+        uniformLocations: {
+          time: gl.getUniformLocation(shaderProgram, 'u_time'),
+          resolution: gl.getUniformLocation(shaderProgram, 'u_resolution'),
+        },
+      };
+
+      const positions = [
+        -1.0,  1.0,
+         1.0,  1.0,
+        -1.0, -1.0,
+         1.0, -1.0,
+      ];
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+      const textureCoords = [
+        0.0, 1.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 0.0,
+      ];
+      const textureCoordBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
+
+      function resizeCanvasToDisplaySize(canvas) {
+        const displayWidth  = canvas.clientWidth;
+        const displayHeight = canvas.clientHeight;
+        if (canvas.width  !== displayWidth || canvas.height !== displayHeight) {
+          canvas.width  = displayWidth;
+          canvas.height = displayHeight;
+        }
+      }
+
+      let startTime = Date.now();
+      function render() {
+        resizeCanvasToDisplaySize(gl.canvas);
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        gl.useProgram(programInfo.program);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
+        gl.vertexAttribPointer(programInfo.attribLocations.textureCoord, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
+
+        gl.uniform1f(programInfo.uniformLocations.time, (Date.now() - startTime) / 1000.0);
+        gl.uniform2f(programInfo.uniformLocations.resolution, gl.canvas.width, gl.canvas.height);
+
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    }
+
+    // Scroll Animation Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+
+
+    // Simple Accordion Logic
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const content = item.querySelector('.accordion-content');
+        const icon = item.querySelector('.icon');
+        const isOpen = content.classList.contains('open');
+        
+        // Close all
+        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+        document.querySelectorAll('.faq-item .icon').forEach(i => i.style.transform = 'rotate(0deg)');
+        
+        // Open clicked if it was closed
+        if (!isOpen) {
+          content.classList.add('open');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+    // ============================================================
+    // MainZ Downloader — Core App Logic
+    // API: p.savenow.to (key stored locally in this browser only)
+    // ============================================================
+    (function () {
+      const API_BASE = 'https://p.savenow.to/ajax';
+      const HARDCODED_API_KEY = '41b47db04b7f64902d46bfd562e3d92dae3beb83';
+      const LS_KEY_HISTORY = 'mainz_history';
+      const MAX_HISTORY = 20;
+
+      // ---- Element refs ----
+      const el = {
+        navHome: document.getElementById('navHome'),
+        navHistory: document.getElementById('navHistory'),
+        videoUrlInput: document.getElementById('videoUrlInput'),
+        formatChips: document.querySelectorAll('.format-chip'),
+        sikatBtn: document.getElementById('sikatBtn'),
+        sikatBtnIcon: document.getElementById('sikatBtnIcon'),
+        sikatBtnText: document.getElementById('sikatBtnText'),
+        errorMsg: document.getElementById('errorMsg'),
+        previewSection: document.getElementById('previewSection'),
+        previewThumb: document.getElementById('previewThumb'),
+        previewThumbFallback: document.getElementById('previewThumbFallback'),
+        previewLoading: document.getElementById('previewLoading'),
+        previewResult: document.getElementById('previewResult'),
+        previewError: document.getElementById('previewError'),
+        previewErrorText: document.getElementById('previewErrorText'),
+        previewTitleLoading: document.getElementById('previewTitleLoading'),
+        previewTitle: document.getElementById('previewTitle'),
+        previewFormat: document.getElementById('previewFormat'),
+        loadingStatusText: document.getElementById('loadingStatusText'),
+        progressBar: document.getElementById('progressBar'),
+        progressPercentText: document.getElementById('progressPercentText'),
+        downloadLink: document.getElementById('downloadLink'),
+        downloadBtnText: document.getElementById('downloadBtnText'),
+        historyList: document.getElementById('historyList'),
+        historyEmpty: document.getElementById('historyEmpty'),
+      };
+
+      let selectedFormat = '720';
+      let isBusy = false;
+      let pollTimer = null;
+
+      // ---- API key (hardcoded, no UI override) ----
+      function getApiKey() {
+        return HARDCODED_API_KEY;
+      }
+
+      // ---- History storage helpers ----
+      function getHistory() {
+        try {
+          const raw = localStorage.getItem(LS_KEY_HISTORY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+      function saveHistory(list) {
+        localStorage.setItem(LS_KEY_HISTORY, JSON.stringify(list.slice(0, MAX_HISTORY)));
+      }
+      function addHistoryItem(item) {
+        const list = getHistory();
+        list.unshift(item);
+        saveHistory(list);
+        renderHistory();
+      }
+      function isAudioFormat(format) {
+        return format === 'mp3' || format === 'm4a';
+      }
+      function formatLabel(format) {
+        const map = {
+          '360': 'MP4 360p', '720': 'MP4 720p', '1080': 'MP4 1080p',
+          '1440': 'MP4 1440p', 'mp44k': 'MP4 4K', 'mp48k': 'MP4 8K',
+          '4k': 'WEBM 4K', '8k': 'WEBM 8K', 'mp3': 'MP3 Audio', 'm4a': 'M4A Audio'
+        };
+        return map[format] || format.toUpperCase();
+      }
+      function renderHistory() {
+        const list = getHistory();
+        el.historyList.querySelectorAll('.history-item').forEach(n => n.remove());
+        if (list.length === 0) {
+          el.historyEmpty.classList.remove('hidden');
+          return;
+        }
+        el.historyEmpty.classList.add('hidden');
+        list.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'glass-card rounded-xl p-sm flex items-center gap-sm border border-white/5 history-item';
+          const thumbHtml = item.thumb
+            ? `<img class="w-full h-full object-cover" src="${escapeAttr(item.thumb)}"/>`
+            : `<div class="w-full h-full flex items-center justify-center bg-primary/10"><span class="material-symbols-outlined text-primary">${isAudioFormat(item.format) ? 'music_note' : 'movie'}</span></div>`;
+          card.innerHTML = `
+            <div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden flex-shrink-0">${thumbHtml}</div>
+            <div class="flex-grow min-w-0">
+              <h4 class="font-body-lg text-on-surface line-clamp-1">${escapeHtml(item.title || 'Tanpa Judul')}</h4>
+              <p class="font-body-sm text-on-surface-variant">Udah pernah disikat • ${escapeHtml(formatLabel(item.format))}</p>
+            </div>
+            ${item.downloadUrl ? `<a href="${escapeAttr(item.downloadUrl)}" target="_blank" class="material-symbols-outlined text-primary flex-shrink-0">download</a>` : `<span class="material-symbols-outlined text-on-surface-variant flex-shrink-0">history</span>`}
+          `;
+          el.historyList.appendChild(card);
+        });
+      }
+      function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str == null ? '' : String(str);
+        return d.innerHTML;
+      }
+      function escapeAttr(str) {
+        return escapeHtml(str).replace(/"/g, '&quot;');
+      }
+
+      // ---- Bottom nav scroll-to-section ----
+      el.navHome.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      el.navHistory.addEventListener('click', () => {
+        document.getElementById('historyList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // ---- Format chip selection ----
+      function setSelectedFormat(format) {
+        selectedFormat = format;
+        el.formatChips.forEach((chip) => {
+          if (chip.dataset.format === format) {
+            chip.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+            chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'border-outline-variant');
+          } else {
+            chip.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+            chip.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'border-outline-variant');
+          }
+        });
+      }
+      el.formatChips.forEach((chip) => {
+        chip.addEventListener('click', () => setSelectedFormat(chip.dataset.format));
+      });
+      setSelectedFormat(selectedFormat);
+
+      // ---- Error helper ----
+      function showError(message) {
+        el.errorMsg.textContent = message;
+        el.errorMsg.classList.remove('hidden');
+      }
+      function clearError() {
+        el.errorMsg.classList.add('hidden');
+        el.errorMsg.textContent = '';
+      }
+
+      // ---- Busy / button state ----
+      function setBusy(busy) {
+        isBusy = busy;
+        el.sikatBtn.disabled = busy;
+        el.sikatBtn.classList.toggle('opacity-60', busy);
+        el.sikatBtnText.textContent = busy ? 'Lagi Disikat...' : 'Sikat Bro!';
+        el.sikatBtnIcon.textContent = busy ? 'progress_activity' : 'analytics';
+        el.sikatBtnIcon.classList.toggle('animate-spin', busy);
+      }
+
+      // ---- Preview state switchers ----
+      function showPreview() {
+        el.previewSection.classList.remove('hidden');
+        el.previewSection.classList.add('flex');
+        el.previewSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      function showLoadingState(statusText, percent) {
+        el.previewLoading.classList.remove('hidden');
+        el.previewResult.classList.add('hidden');
+        el.previewResult.classList.remove('flex');
+        el.previewError.classList.add('hidden');
+        el.previewError.classList.remove('flex');
+        el.loadingStatusText.textContent = statusText || 'Lagi Disikat...';
+        const pct = Math.max(0, Math.min(100, percent || 0));
+        el.progressBar.style.width = pct + '%';
+        el.progressPercentText.textContent = Math.round(pct) + '%';
+      }
+      function showResultState(title, downloadUrl, format) {
+        el.previewLoading.classList.add('hidden');
+        el.previewError.classList.add('hidden');
+        el.previewError.classList.remove('flex');
+        el.previewResult.classList.remove('hidden');
+        el.previewResult.classList.add('flex');
+        el.previewTitle.textContent = title || 'Tanpa Judul';
+        el.previewFormat.textContent = 'Format: ' + formatLabel(format);
+        el.downloadLink.href = downloadUrl;
+        el.downloadBtnText.textContent = isAudioFormat(format) ? 'Sedot Audio' : 'Sedot Video';
+      }
+      function showErrorState(message) {
+        el.previewLoading.classList.add('hidden');
+        el.previewResult.classList.add('hidden');
+        el.previewResult.classList.remove('flex');
+        el.previewError.classList.remove('hidden');
+        el.previewError.classList.add('flex');
+        el.previewErrorText.textContent = message;
+      }
+      function setThumb(url) {
+        if (url) {
+          el.previewThumb.src = url;
+          el.previewThumb.classList.remove('hidden');
+          el.previewThumbFallback.classList.add('hidden');
+        } else {
+          el.previewThumb.classList.add('hidden');
+          el.previewThumbFallback.classList.remove('hidden');
+        }
+      }
+
+      // ---- Polling progress.php ----
+      function pollProgress(id, apiKey, meta) {
+        if (pollTimer) clearInterval(pollTimer);
+        let attempts = 0;
+        const maxAttempts = 150; // ~5 minutes at 2s interval
+
+        pollTimer = setInterval(async () => {
+          attempts++;
+          if (attempts > maxAttempts) {
+            clearInterval(pollTimer);
+            setBusy(false);
+            showErrorState('Donlod kelamaan, server kayanya lagi penuh. Coba lagi bentar ye.');
+            return;
+          }
+          try {
+            const res = await fetch(`${API_BASE}/progress.php?id=${encodeURIComponent(id)}`);
+            const data = await res.json();
+
+            const progress = typeof data.progress === 'number' ? data.progress : 0;
+            const pct = progress / 10; // progress is out of 1000
+
+            if (data.download_url || progress >= 1000) {
+              clearInterval(pollTimer);
+              showLoadingState('Hampir Kelar...', 100);
+              setBusy(false);
+              const finalTitle = meta.title || data.title || 'Tanpa Judul';
+              const finalThumb = meta.thumb || data.image || '';
+              setThumb(finalThumb);
+              showResultState(finalTitle, data.download_url, meta.format);
+              addHistoryItem({
+                title: finalTitle,
+                thumb: finalThumb,
+                format: meta.format,
+                downloadUrl: data.download_url,
+                time: Date.now(),
+              });
+              return;
+            }
+
+            if (data.error || data.success === false) {
+              clearInterval(pollTimer);
+              setBusy(false);
+              showErrorState(data.error || 'Proses sikat gagal di tengah jalan, coba lagi ye.');
+              return;
+            }
+
+            showLoadingState('Lagi Disikat...', pct);
+          } catch (e) {
+            clearInterval(pollTimer);
+            setBusy(false);
+            showErrorState('Koneksi ke server putus pas ngecek progress. Coba lagi.');
+          }
+        }, 2000);
+      }
+
+      // ---- Main download trigger ----
+      async function startDownload() {
+        clearError();
+
+        const apiKey = getApiKey();
+
+        const rawUrl = el.videoUrlInput.value.trim();
+        if (!rawUrl) {
+          showError('Link-nya kosong nih, copas dulu link YouTube-nya.');
+          return;
+        }
+        let parsedUrl;
+        try {
+          parsedUrl = new URL(rawUrl);
+        } catch (e) {
+          showError('Link-nya kayanya kaga valid deh, cek lagi gih.');
+          return;
+        }
+
+        setBusy(true);
+        showPreview();
+        setThumb('');
+        showLoadingState('Ngirim Permintaan...', 2);
+
+        try {
+          const params = new URLSearchParams({
+            url: parsedUrl.toString(),
+            format: selectedFormat,
+            apikey: apiKey,
+            add_info: '1',
+            allow_extended_duration: '0',
+            no_merge: '0',
+          });
+          const res = await fetch(`${API_BASE}/download.php?${params.toString()}`);
+          const data = await res.json();
+
+          if (!data.success) {
+            setBusy(false);
+            showErrorState(data.error || 'Gagal mulai donlod. Cek lagi API key ato link-nya ye.');
+            return;
+          }
+
+          const meta = {
+            title: data.info && data.info.title,
+            thumb: data.info && data.info.image,
+            format: selectedFormat,
+          };
+          if (meta.thumb) setThumb(meta.thumb);
+          if (meta.title) el.previewTitleLoading.textContent = meta.title;
+
+          pollProgress(data.id, apiKey, meta);
+        } catch (e) {
+          setBusy(false);
+          showErrorState('Gagal konek ke server. Cek internet lo, atau API key-nya keliru.');
+        }
+      }
+
+      el.sikatBtn.addEventListener('click', () => {
+        if (isBusy) return;
+        startDownload();
+      });
+      el.videoUrlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !isBusy) startDownload();
+      });
+
+      // ---- Init ----
+      renderHistory();
+    })();
+  </script>
+</body></html>
